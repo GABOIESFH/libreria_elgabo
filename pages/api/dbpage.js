@@ -1,5 +1,6 @@
 import mysql from "mysql2";
 
+
 export default async function handler(req, res) {
   const { method, body } = req; //Esto es una abstraccion del requiere
 
@@ -11,8 +12,12 @@ export default async function handler(req, res) {
     password: "pssword",
     database: "bibliotecacurso",
   });
+
+
+
   //Seleccion de metodos HTTPS
   switch (method) {
+
     //Hace Get a API
     case "GET":
      
@@ -34,6 +39,7 @@ export default async function handler(req, res) {
       connection.end();
       break;
 
+
         //Hacer post a API
     case "POST":
         console.log(body);
@@ -54,6 +60,48 @@ export default async function handler(req, res) {
       //cerrar conexion
       connection.end();
       break;
+
+  case "DELETE":
+    //console.log(query)
+    connection.query(
+    'DELETE FROM alumnos WHERE PKid=?',
+    [query.id],
+    function (err, results, fields) {
+    if (err) {
+          console.log(err);
+           res.status(500).json({ error: err });
+         } else {
+          console.log(results);
+           res.status(200).json(results);
+        }
+      }
+      )
+    //cerrar conexion
+     connection.end();
+     break;
+
+    
+    //hacer PUT a API
+    case "PUT":
+      console.log(body);
+      connection.query(
+        'UPDATE alumnos SET nombre=?, apellidos=?, correo=?, matricula=?,edad=? WHERE PKid=?',
+        [body.nombre,body.apellidos,body.correo,body.matricula,body.edad,body.id],
+        function (err, results, fields) {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ error: err });
+          } else {
+            console.log(results);
+            res.status(200).json(results);
+          }
+        }
+        )
+      //cerrar conexion
+      connection.end();
+      break;
+      
   };
+    
    
     }
