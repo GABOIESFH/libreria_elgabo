@@ -1,6 +1,7 @@
 import { data } from 'autoprefixer'
 import  axios from 'axios'
 import { useEffect, useState } from 'react'
+import Popup from '@/components/Popup'
 
 //peticion a la api
 export async function getServerSideProps(){
@@ -41,6 +42,7 @@ export default function Testdb({ data }) {
   console.log(data)
   return (
     <>
+    <Popup/>
     <div className='flex'>
     {/* boton de carga */}
     {loading ? (
@@ -60,6 +62,9 @@ export default function Testdb({ data }) {
           <div className="flex" key={i}>
             <h1 className="text-white">{alumno.nombre}</h1>
             <h2 className="text-xs">{alumno.apellidos}</h2>
+            {/* Boton para eliminar */}
+            {/* <button className='bg-red-500' onClick={()=>}></button> */}
+            <button className='bg-blue-500'>Editar</button>
           </div>
         ))}
       </main>
