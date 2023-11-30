@@ -15,8 +15,13 @@ export async function getServerSideProps(){
 }
 
 export default function Testdb({ data }) {
-  const [loading, setLoading]= useState(false) //inicializacion en falso
+ //inicializacion de constantes
+  //const [data,setData]=useState([{}])
+  const [loading, setLoading]= useState(false) 
   const [nombre, setNombre]= useState('')
+  const [open,setOpen]=useState(false)
+
+  
 //1poner boton
 //2click al boton cambie el estado a true
 //3espero 10 segundos
@@ -42,7 +47,7 @@ export default function Testdb({ data }) {
   console.log(data)
   return (
     <>
-    <Popup/>
+    <Popup open={open} setOpen={setOpen}/>
     <div className='flex'>
     {/* boton de carga */}
     {loading ? (
@@ -64,7 +69,7 @@ export default function Testdb({ data }) {
             <h2 className="text-xs">{alumno.apellidos}</h2>
             {/* Boton para eliminar */}
             {/* <button className='bg-red-500' onClick={()=>}></button> */}
-            <button className='bg-blue-500'>Editar</button>
+            <button className='bg-blue-500'onClick={()=>setOpen(true)}>Editar</button>
           </div>
         ))}
       </main>
