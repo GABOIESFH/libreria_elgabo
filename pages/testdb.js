@@ -20,6 +20,7 @@ export default function Testdb({ data }) {
   const [loading, setLoading]= useState(false) 
   const [nombre, setNombre]= useState('')
   const [open,setOpen]=useState(false)
+  const [alumno,setAlumno]=useState({})
 
   
 //1poner boton
@@ -47,7 +48,7 @@ export default function Testdb({ data }) {
   console.log(data)
   return (
     <>
-    <Popup open={open} setOpen={setOpen}/>
+    <Popup open={open} setOpen={setOpen} alumno={alumno}/>
     <div className='flex'>
     {/* boton de carga */}
     {loading ? (
@@ -69,7 +70,10 @@ export default function Testdb({ data }) {
             <h2 className="text-xs">{alumno.apellidos}</h2>
             {/* Boton para eliminar */}
             {/* <button className='bg-red-500' onClick={()=>}></button> */}
-            <button className='bg-blue-500'onClick={()=>setOpen(true)}>Editar</button>
+            <button className='bg-blue-500'onClick={()=>(
+              setAlumno(alumno),
+              setOpen(true)
+              )}>Editar</button>
           </div>
         ))}
       </main>

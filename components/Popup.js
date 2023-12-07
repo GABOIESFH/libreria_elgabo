@@ -2,10 +2,10 @@ import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
-export default function Popup({open,setOpen}) {
+export default function Popup({open,setOpen, alumno}) {
 
   const cancelButtonRef = useRef(null)
-
+  console.log(alumno)
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -40,12 +40,19 @@ export default function Popup({open,setOpen}) {
                     </div>
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                       <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                        Deactivate account
+                        Edita Al Alumno
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          Are you sure you want to deactivate your account? All of your data will be permanently
-                          removed. This action cannot be undone.
+                          {alumno.nombre}
+                          <br />
+                          {alumno.apellidos}
+                          <br />
+                          {alumno.correo}
+                          <br />
+                          {alumno.matricula}
+                          <br />
+                          {alumno.edad}
                         </p>
                       </div>
                     </div>
